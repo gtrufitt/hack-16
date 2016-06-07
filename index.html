@@ -20,15 +20,31 @@
     <script>
       var host = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(host);
+      var count = 0;
       ws.onmessage = function (event) {
-        var li = document.createElement('li');
-        li.innerHTML = JSON.parse(event.data);
-        document.querySelector('#pings').appendChild(li);
+
+        var jsonEvent = JSON.parse(event.data);
+console.log(jsonEvent)
+        if (jsonEvent.dataType === 'button') {
+          count = count + 1;
+          var p = document.createElement('p');
+          p.innerHTML = count;
+          document.querySelector('#clicks').appendChild(p);
+        } else {
+          var li = document.createElement('li');
+          li.innerHTML = event.data;
+//          document.querySelector('#pings').appendChild(li);
+        }
       };
+
+      ws.send('Opened');
+
     </script>
   </head>
   <body>
     <h1>Pings</h1>
+    <div id="clicks"></div>
     <ul id='pings'></ul>
+    <button onclick="ws.send('buttonclick')">Click me test</button>
   </body>
 </html>
