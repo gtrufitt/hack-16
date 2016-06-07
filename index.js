@@ -21,9 +21,12 @@ wss.on("connection", function(ws) {
 
   console.log("websocket connection open")
 
-  ws.on('message', function(data) {
-    console.log(data)
-    ws.send(JSON.stringify({dataType: 'button'}))
+  ws.on('message', function() {
+    ws.broadcast = function broadcast() {
+      ws.clients.forEach(function each(client) {
+        client.send(JSON.stringify({dataType: 'button'}))
+      });
+    };
   });
 
   ws.on("close", function() {
