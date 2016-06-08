@@ -30,7 +30,7 @@ var aWss = expressWs.getWss('/');
 
 setInterval(function () {
     aWss.clients.forEach(function (client) {
-        client.send('hello');
+        client.send(JSON.stringify({dataType: 'button'}));
     });
 }, 5000);
 
