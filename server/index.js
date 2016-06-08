@@ -19,13 +19,6 @@ app.get('/admin', function (req, res) {
 });
 
 app.ws('/', function(ws, req) {
-    connections.push(ws);
-
-    connections.forEach(function(c){
-        c.send(JSON.stringify({
-            dataType: 'button'
-        }))
-    });
 
     ws.on('message', function(msg) {
         console.log(msg);
@@ -33,7 +26,13 @@ app.ws('/', function(ws, req) {
 
 });
 
+var aWss = expressWs.getWss('/');
 
+setInterval(function () {
+    aWss.clients.forEach(function (client) {
+        client.send('hello');
+    });
+}, 5000);
 
 app.ws('/admin', function(ws, req) {
     ws.on('message', function(msg) {
