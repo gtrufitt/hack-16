@@ -16,7 +16,7 @@ module.exports = function (app) {
             sendToAll({
                 messageType: 'log',
                 messageData: 'HELLO'
-            }, aWss);
+            });
         }, 5000);
 
     }
@@ -32,15 +32,25 @@ module.exports = function (app) {
             sendToAll({
                 messageType: 'log',
                 messageData: 'HELLO'
-            }, aWss);
+            });
         }, 5000);
     }
 
     function ingestMessage(messageObj) {
-        console.log(messageObj)
+        console.log(messageObj);
+        // Message passed as stringified JSON
+        var messageObj = JSON.parse(messageObj);
+
+        // Add each type here and call appropriate methods
+        switch (messageObj.messageType) {
+            case 'showOnAll':
+                sendToAll(messageObj);
+        }
     }
 
-    function sendToAll(messageObj, aWss) {
+    function sendToAll(messageObj) {
+        var aWss = expressWs.getWss('/');
+
         aWss.clients.forEach(function each(client) {
             client.send(JSON.stringify(messageObj))
         });

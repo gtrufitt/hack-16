@@ -1,102 +1,14 @@
 <html>
   <head>
-    <style>
-      body {
-        font-family: "Helvetica Neue", helvetica, arial;
-        padding: 15px;
-      }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      ul li {
-        line-height: 1.4;
-      }
-
-      .plot {
-        background-color: #c6c6c6;
-        position: relative;
-        height: 500px;
-        width: 500px;
-      }
-
-      .plot-point {
-        background-color: red;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-      }
-    </style>
-
     <script>
       var host = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(host);
-      var count = 0;
-      var admin = true;
-
-      if (window.location.hash === 'admin') {
-        admin = true;
-      }
-
-      ws.onmessage = function (event) {
-
-        var jsonEvent = JSON.parse(event.data);
-console.log(jsonEvent)
-        if (jsonEvent.dataType === 'button') {
-          count = count + 1;
-          var p = document.createElement('p');
-          p.innerHTML = count;
-          document.querySelector('#clicks').appendChild(p);
-        } else {
-          var li = document.createElement('li');
-          li.innerHTML = event.data;
-//          document.querySelector('#pings').appendChild(li);
-        }
-
-        if (admin) {
-          if (jsonEvent.dataType === 'pointPlot') {
-            plotPoints(jsonEvent.points);
-          }
-        }
-      };
-
-      ws.send('Opened');
-
-      if (!admin) {
-        listenForPointPlots();
-      }
-
-      function plotPoints (points) {
-        console.log(points)
-        var plotPoint = document.createElement('span');
-        plotPoint.setAttribute('class', 'plot-point');
-        plotPoint.style.top = points.top;
-        plotPoint.style.left = points.left;
-        document.getElementById('plot').appendChild(plotPoint);
-
-      }
-
-      function listenForPointPlots () {
-
-      }
-
-      if (window.location.hash === 'admin') {
-        plotPoints();
-      } else {
-        listenForPointPlots();
-      }
-
     </script>
   </head>
   <body>
     <h1>Admin</h1>
-    <div id="clicks"></div>
-    <ul id='pings'></ul>
-    <div id="plot" class="plot"></div>
-    <button onclick="ws.send('pointPlot', { top: Math.floor(Math.random() * 100) + 1, left: Math.floor(Math.random() * 100) + 1    })">Click me test</button>
+    <ul id="clicks"></ul>
+    <button onclick="ws.send(JSON.stringify({ messageType: 'showOnAll', messageData: 'hello' }))">CLICK ME</button>
   </body>
   <script src="./bundle.js"></script>
 </html>
