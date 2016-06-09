@@ -1,5 +1,8 @@
 var React = require("react");
+
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
+var InitialComponent = require("./admin/InitialComponent.jsx");
+
 var comms = require("../utils/comms-client")();
 
 var AdminComponent = React.createClass({
@@ -8,7 +11,8 @@ var AdminComponent = React.createClass({
         return {
             count: 0,
             clicks: [],
-            currentComponent: "CoffeePollComponent"
+            currentComponent: "InitialComponent",
+            usersConnected: 0
         }
     },
 
@@ -16,8 +20,12 @@ var AdminComponent = React.createClass({
         this.props.ws.onmessage = this.onMessage;
     },
 
-    render: function() {        
-        var newComponent = <CoffeePollComponent />;
+    render: function() {
+        var newComponent;
+        switch(this.state.currentComponent) {
+            case 'InitialComponent': newComponent = <InitialComponent />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent />; break;
+        }
         return (
             <div className="reactComponentContainer">
                 <h1 className="f-header">Admin</h1>
@@ -32,12 +40,18 @@ var AdminComponent = React.createClass({
         );
     },
 
-    onButtonClick: function () {
-        comms.sendAMessage({
+    componentDidUpdate: function () {
+        this.props.ws.send(JSON.stringify({
             messageType: 'setCurrentComponent',
             messageData: {
                 componentName: this.state.currentComponent
             }
+        }));
+    },
+
+    onButtonClick: function () {
+        this.setState({
+            currentComponent: 'CoffeePollComponent'
         });
     },
 

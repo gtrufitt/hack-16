@@ -20,8 +20,8 @@ var MainComponent = React.createClass({
     render: function() {
         var newComponent;
         switch(this.state.currentComponent) {
-            case 'InitialComponent': newComponent = <InitialComponent />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent />; break;
+            case 'InitialComponent': newComponent = <InitialComponent ws={this.props.ws} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent ws={this.props.ws} />; break;
         }
         return (
             <div className="reactComponentContainer">
