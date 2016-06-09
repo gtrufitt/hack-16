@@ -1,6 +1,4 @@
 var React = require("react");
-
-
 var CoffeePollComponent = require("./user/CoffeePollComponent.jsx");
 var InitialComponent = require("./user/InitialComponent.jsx");
 
@@ -8,7 +6,8 @@ var MainComponent = React.createClass({
 
     getInitialState: function () {
         return {
-            currentComponent: "InitialComponent"
+            currentComponent: "InitialComponent",
+            clicks: []
         }
     },
 
