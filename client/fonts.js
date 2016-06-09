@@ -14,7 +14,7 @@ function loadFont(fontUrl, fontName) {
 		// Convert to JSON
 		return response.text()
 	}).then(function(font){		
-		this['guFont'] = fontData => fontData.css;
+		var guFont = fontData => fontData.css;
 
 		document.querySelector('.webfont-' + fontName).innerHTML = eval(font);
 	}).catch(function(err) {
