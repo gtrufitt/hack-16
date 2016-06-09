@@ -9,9 +9,9 @@ var AdminComponent = React.createClass({
     render: function() {
         return (
             <div className="reactComponentContainer">
-                <h1 class="f-header">Admin</h1>
+                <h1 className="f-header">Admin</h1>
                 <ul id="clicks"></ul>
-                <button class="f-headline" onClick={this.onButtonClick}>CLICK ME</button>
+                <button className="f-headline" onClick={this.onButtonClick}>CLICK ME</button>
             </div>
         );
     },
