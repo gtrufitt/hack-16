@@ -17,9 +17,9 @@ if (window.location.pathname.indexOf('admin') > -1) {
 
 var React = require("react");
 var ReactDOM = require('react-dom');
-var component = window.location.pathname.indexOf('admin') > -1 ?
-    React.createFactory(require("./components/AdminComponent.jsx").AdminComponent) :
-    React.createFactory(require("./components/MainComponent.jsx").MainComponent);
+var adminComponent = require("./components/AdminComponent.jsx").AdminComponent;
+var mainComponent = require("./components/MainComponent.jsx").MainComponent;
+var component = React.createFactory(window.location.pathname.indexOf('admin') > -1 ? adminComponent : mainComponent);
 
 var loadFonts = require('./fonts');
 loadFonts();

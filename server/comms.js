@@ -1,7 +1,7 @@
 module.exports = function (app) {
     var expressWs = require('express-ws')(app);
 
-    var currentComponent ="unknown";
+    var currentComponent ="InitialComponent";
 
     // Listeners
 
@@ -41,6 +41,9 @@ module.exports = function (app) {
             case 'setCurrentComponent':
                 setCurrentComponent(messageObj.messageData);
                 break;
+            case 'getCurrentComponent':
+                getCurrentComponent();
+                break;
         }
     }
 
@@ -59,6 +62,15 @@ module.exports = function (app) {
             case 'setCurrentComponent':
                 setCurrentComponent(messageObj.messageData);
                 break;
+            case 'getCurrentComponent':
+                getCurrentComponent();
+                break;
+            case 'coffeeVote':
+                sendToAll(messageObj);
+                break;
+            case 'getCurrentComponent':
+                getCurrentComponent();
+                break;
         }
     }
 
@@ -75,8 +87,18 @@ module.exports = function (app) {
         })
     }
 
-    // Send messages
 
+    function getCurrentComponent() {
+        console.log('get component request ');
+        sendToAll({
+            messageType: 'getCurrentComponent',
+            messageData: {
+                componentName: currentComponent
+            }
+        })
+    }
+
+    // Send messages
     function sendToAll(messageObj) {
         var aWss = expressWs.getWss('/');
 

@@ -17,14 +17,14 @@ var AdminComponent = React.createClass({
     },
 
     componentDidMount: function() {
-        this.props.ws.onmessage = this.onMessage;
+        // this.props.ws.onmessage = this.onMessage;
     },
 
     render: function() {
         var newComponent;
         switch(this.state.currentComponent) {
-            case 'InitialComponent': newComponent = <InitialComponent />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent />; break;
+            case 'InitialComponent': newComponent = <InitialComponent {...this.props} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent {...this.props} />; break;
         }
         return (
             <div className="reactComponentContainer">
@@ -56,6 +56,7 @@ var AdminComponent = React.createClass({
     },
 
     onMessage: function (event) {
+
         var jsonEvent = JSON.parse(event.data);
         
         if (jsonEvent.messageType === 'userConnected') {
@@ -64,20 +65,21 @@ var AdminComponent = React.createClass({
             })
         }
 
-        // Test stuff
-        console.log(jsonEvent);
-        if (jsonEvent.messageType === 'log') {
-            this.setState({
-                count: this.state.count + 1
-            });
-        }
+        // var jsonEvent = JSON.parse(event.data);
+        // console.log(jsonEvent);
+        // if (jsonEvent.messageType === 'log') {
+        //     this.setState({
+        //         count: this.state.count + 1
+        //     });
+        // }
+        //
+        // if (jsonEvent.messageType === 'showOnAll') {
+        //     var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
+        //     var clicks = this.state.clicks.slice(0);
+        //     clicks.push(message);
+        //     this.setState({clicks});
+        // }
 
-        if (jsonEvent.messageType === 'showOnAll') {
-            var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
-            var clicks = this.state.clicks.slice(0);
-            clicks.push(message);
-            this.setState({clicks});
-        }
     }
 
 });
