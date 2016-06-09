@@ -41,3 +41,17 @@ var loadFonts = require('./fonts');
 loadFonts();
 
 console.log("hello");
+
+var React = require("react");
+var ReactDOM = require('react-dom');
+var component = window.location.pathname.indexOf('admin') > -1 ?
+    React.createFactory(require("./components/AdminComponent.jsx").AdminComponent) :
+    React.createFactory(require("./components/MainComponent.jsx").MainComponent);
+
+ReactDOM.render(
+    component({
+        ws: ws
+    }),
+
+    document.getElementById('react-container')
+);
