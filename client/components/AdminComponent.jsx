@@ -35,7 +35,7 @@ var AdminComponent = React.createClass({
                 }</ul>
                 <button className="f-headline" onClick={this.onButtonClick}>CLICK ME TO START SESSION</button>
                 <div>{newComponent}</div>
-                
+                <p>Users connected: {this.state.usersConnected}</p>
             </div>
         );
     },
@@ -57,6 +57,14 @@ var AdminComponent = React.createClass({
 
     onMessage: function (event) {
         var jsonEvent = JSON.parse(event.data);
+        
+        if (jsonEvent.messageType === 'userConnected') {
+            this.setState({
+                usersConnected: this.state.usersConnected + 1
+            })
+        }
+
+        // Test stuff
         console.log(jsonEvent);
         if (jsonEvent.messageType === 'log') {
             this.setState({
