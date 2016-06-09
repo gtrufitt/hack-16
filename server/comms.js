@@ -1,7 +1,7 @@
 module.exports = function (app) {
     var expressWs = require('express-ws')(app);
 
-    var currentComponent ="unknown";
+    var currentComponent ="InitialComponent";
 
     function setupIndexListeners() {
 
@@ -26,7 +26,9 @@ module.exports = function (app) {
             case 'showOnAll':
                 sendToAll(messageObj);
             case 'setCurrentComponent':
-                setCurrentComponent(messageObj.messageData);    
+                setCurrentComponent(messageObj.messageData);
+            case 'getCurrentComponent':
+                getCurrentComponent();    
         }
     }
 
@@ -38,6 +40,16 @@ module.exports = function (app) {
             messageData: {
                 componentName: currentComponent
             }        
+        })
+    }
+
+    function getCurrentComponent() {
+        console.log('get component request ');
+        sendToAll({
+            messageType: 'getCurrentComponent',
+            messageData: {
+                componentName: currentComponent
+            }
         })
     }
 
