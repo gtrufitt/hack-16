@@ -13,11 +13,11 @@ var AdminComponent = React.createClass({
     },
 
     componentDidMount: function() {
-        this.props.ws.onmessage = this.onMessage;
+        // this.props.ws.onmessage = this.onMessage;
     },
 
     render: function() {        
-        var newComponent = <CoffeePollComponent />;
+        var newComponent = <CoffeePollComponent {...this.props}/>;
         return (
             <div className="reactComponentContainer">
                 <h1 className="f-header">Admin</h1>
@@ -42,20 +42,20 @@ var AdminComponent = React.createClass({
     },
 
     onMessage: function (event) {
-        var jsonEvent = JSON.parse(event.data);
-        console.log(jsonEvent);
-        if (jsonEvent.messageType === 'log') {
-            this.setState({
-                count: this.state.count + 1
-            });
-        }
-
-        if (jsonEvent.messageType === 'showOnAll') {
-            var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
-            var clicks = this.state.clicks.slice(0);
-            clicks.push(message);
-            this.setState({clicks});
-        }
+        // var jsonEvent = JSON.parse(event.data);
+        // console.log(jsonEvent);
+        // if (jsonEvent.messageType === 'log') {
+        //     this.setState({
+        //         count: this.state.count + 1
+        //     });
+        // }
+        //
+        // if (jsonEvent.messageType === 'showOnAll') {
+        //     var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
+        //     var clicks = this.state.clicks.slice(0);
+        //     clicks.push(message);
+        //     this.setState({clicks});
+        // }
     }
 
 });

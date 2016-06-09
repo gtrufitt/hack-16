@@ -2,6 +2,7 @@
 //CoffeePollComponent.jsx
 
 var React = require("react");
+var comms = require("../../utils/comms-client")();
 
 var CoffeePollComponent = React.createClass({
 
@@ -20,14 +21,19 @@ var CoffeePollComponent = React.createClass({
             <div className="coffeePollComponent">
                 <h2>User Coffee Poll</h2>
                 {this.state.buttons.map((_, i)=> (
-                    <button onClick={this.onButtonClick.bind(this, i)}>{i}</button>
+                    <button key={i} onClick={this.onButtonClick.bind(this, i)}>{i}</button>
                 ))}
             </div>
         );
     },
 
-    onButtonClick: function (){
-
+    onButtonClick: function (i){
+        comms.sendAMessage({
+            messageType: 'coffeeVote',
+            messageData: {
+                numberOfCoffees: i
+            }
+        });
     }
 
 });

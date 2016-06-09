@@ -24,11 +24,13 @@ module.exports = function (app) {
         // Add each type here and call appropriate methods
         switch (messageObj.messageType) {
             case 'showOnAll':
-                sendToAll(messageObj);
+                sendToAll(messageObj); break;
+            case 'coffeeVote':
+                sendToAll(messageObj); break;
             case 'setCurrentComponent':
-                setCurrentComponent(messageObj.messageData);
+                setCurrentComponent(messageObj.messageData); break;
             case 'getCurrentComponent':
-                getCurrentComponent();    
+                getCurrentComponent(); break;
         }
     }
 
