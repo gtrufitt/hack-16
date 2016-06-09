@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var CoffeePollComponent = require("./user/CoffeePollComponent.jsx");
 var InitialComponent = require("./user/InitialComponent.jsx");
@@ -30,13 +31,15 @@ var MainComponent = React.createClass({
     render: function() {
         var newComponent;
         switch(this.state.currentComponent) {
-            case 'InitialComponent': newComponent = <InitialComponent />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent />; break;
+            case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent"/>; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent"/>; break;
         }
         return (
             <div className="reactComponentContainer">
-                <img className="logo" src="./img/logo.jpg" alt=""/>                
-                {newComponent}
+                <img className="logo" src="./img/logo.jpg" alt=""/>
+                <ReactCSSTransitionGroup transitionName="activity" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                    {newComponent}
+                </ReactCSSTransitionGroup>                
             </div>
         );
     },

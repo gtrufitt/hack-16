@@ -1,0 +1,19 @@
+@import 'fonts.scss';
+
+.activity-enter {
+  opacity: 0.01;
+}
+
+.activity-enter.activity-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.activity-leave {
+  opacity: 1;
+}
+
+.activity-leave.activity-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
