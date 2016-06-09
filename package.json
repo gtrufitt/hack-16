@@ -25,7 +25,7 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "browserify client/main.js -o public/bundle.js",
-    "preinstall": "mkdir public", 
+    "preinstall": "mkdir -p public", 
     "postinstall": "npm run build",
     "watch": "watchify client/main.js -v -o public/bundle.js"
   }
