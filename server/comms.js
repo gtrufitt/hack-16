@@ -1,6 +1,7 @@
 module.exports = function (app) {
     var expressWs = require('express-ws')(app);
 
+    var currentComponent ="unknown";
 
     function setupIndexListeners() {
 
@@ -24,7 +25,20 @@ module.exports = function (app) {
         switch (messageObj.messageType) {
             case 'showOnAll':
                 sendToAll(messageObj);
+            case 'setCurrentComponent':
+                setCurrentComponent(messageObj.messageData);    
         }
+    }
+
+    function setCurrentComponent(messageObj) {
+        currentComponent = messageObj.componentName;
+        console.log('setting component to ' + messageObj.componentName);
+        sendToAll({
+            messageType: 'setCurrentComponent',
+            messageData: {
+                componentName: currentComponent
+            }        
+        })
     }
 
     function sendToAll(messageObj) {

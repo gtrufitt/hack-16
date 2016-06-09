@@ -1,33 +1,57 @@
 var React = require("react");
-var comms = require("../utils/comms-client")();
+
+
+var CoffeePollComponent = require("./user/CoffeePollComponent.jsx");
+var InitialComponent = require("./user/InitialComponent.jsx");
 
 var MainComponent = React.createClass({
 
+    getInitialState: function () {
+        return {
+            currentComponent: "InitialComponent"
+        }
+    },
+
     componentDidMount: function() {
+        this.props.ws.onmessage = this.onMessage;
         console.log("The main component mounted!!")
     },
 
     render: function() {
+        var newComponent;
+        switch(this.state.currentComponent) {
+            case 'InitialComponent': newComponent = <InitialComponent />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent />; break;
+        }
         return (
             <div className="reactComponentContainer">
                 <h1>Welcome</h1>
                 <img class="logo" src="./img/logo.jpg" alt=""/>
-                <button onClick={this.onButtonClick}>CLICK ME</button>
+                {newComponent}
             </div>
         );
     },
 
-    onButtonClick: function () {
-            comms.sendAMessage({
-                messageType: 'showOnAll',
-                messageData: {
-                    messageType: 'log',
-                    messageData: {
-                        main: 'testData'
-                    }
-                }
-            })
+    onMessage: function(event) {
+        var jsonEvent = JSON.parse(event.data);
+        console.log(jsonEvent);
+
+        if (jsonEvent.messageType === 'setCurrentComponent') {
+            this.setState({
+                currentComponent: jsonEvent.messageData.componentName
+            });
+        }
+
+        if (jsonEvent.messageType === 'showOnAll') {
+            var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
+            var clicks = this.state.clicks.slice(0);
+            clicks.push(message);
+            this.setState({clicks});
+        }
+
     }
+
+
 
 });
 

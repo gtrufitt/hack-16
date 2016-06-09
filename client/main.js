@@ -12,13 +12,6 @@ if (window.location.pathname.indexOf('admin') > -1) {
     sassify(indexCss);
 }
 
-// Utils
-
-require('./utils/comms-client.js')();
-
-
-console.log("hello");
-
 // React
 
 var React = require("react");
