@@ -20,6 +20,7 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "browserify -t [ babelify ] client/main.js -o public/bundle.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "watch": "watchify client/main.js -v -o public/bundle.js"
   }
 }
