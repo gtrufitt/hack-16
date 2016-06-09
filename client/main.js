@@ -23,6 +23,7 @@ var mainComponent = require("./components/MainComponent.jsx");
 
 var component = React.createFactory(isAdmin ? adminComponent : mainComponent);
 
+// Fonts
 var loadFonts = require('./fonts');
 loadFonts();
 
