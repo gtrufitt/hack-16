@@ -29,8 +29,15 @@
 }
 
 .f-textSans {
-    font-family: 'Guardian Text Sans', Georgia, serif;
+    font-family: 'Guardian Text Sans Web', Georgia, serif;
     font-weight: 400;
+    font-size: 14pt;
+    line-height: 20pt;
+}
+
+.f-sans {
+    font-family: 'Guardian Sans Web', Georgia, serif;
+    font-weight: 100;
     font-size: 14pt;
     line-height: 20pt;
 }
