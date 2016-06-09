@@ -24,6 +24,10 @@ var CoffeePollComponent = React.createClass({
                 ))}
             </div>
         );
+    },
+
+    onButtonClick: function (){
+
     }
 
 });
