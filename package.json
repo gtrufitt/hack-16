@@ -19,9 +19,12 @@
   "engines": {
     "node": "0.10.x"
   },
+  "browserify": {
+    "transform": [ "babelify", "sassify" ]
+  },
   "scripts": {
     "start": "node server/index.js",
-    "build": "browserify -t babelify -t sassify client/main.js -o public/bundle.js",
+    "build": "browserify client/main.js -o public/bundle.js",
     "preinstall": "mkdir public", 
     "postinstall": "npm run build",
     "watch": "watchify client/main.js -v -o public/bundle.js"
