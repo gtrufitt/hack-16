@@ -18,6 +18,8 @@ app.get('/admin', function (req, res) {
     res.sendFile('admin.html', {"root": 'client'});
 });
 
+app.use(express.static('public'));
+
 app.ws('/', function(ws, req) {
 
     ws.on('message', function(msg) {

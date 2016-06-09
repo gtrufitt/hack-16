@@ -19,6 +19,6 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "postinstall": ""
+    "build": "browserify -t [ babelify ] client/main.js -o public/bundle.js"
   }
 }
