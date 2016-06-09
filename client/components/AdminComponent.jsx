@@ -60,4 +60,4 @@ var AdminComponent = React.createClass({
 
 });
 
-exports.AdminComponent = AdminComponent;
+module.exports = AdminComponent;

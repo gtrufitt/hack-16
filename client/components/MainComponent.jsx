@@ -65,4 +65,4 @@ var MainComponent = React.createClass({
 
 });
 
-exports.MainComponent = MainComponent;
+module.exports = MainComponent;

@@ -6,7 +6,9 @@ var indexCss = require('./index.scss');
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host)
 
-if (window.location.pathname.indexOf('admin') > -1) {
+var isAdmin = window.location.pathname.indexOf('admin') > -1;
+
+if (isAdmin) {
     sassify(adminCss);
 } else {
     sassify(indexCss);
@@ -16,9 +18,10 @@ if (window.location.pathname.indexOf('admin') > -1) {
 
 var React = require("react");
 var ReactDOM = require('react-dom');
-var adminComponent = require("./components/AdminComponent.jsx").AdminComponent;
-var mainComponent = require("./components/MainComponent.jsx").MainComponent;
-var component = React.createFactory(window.location.pathname.indexOf('admin') > -1 ? adminComponent : mainComponent);
+var adminComponent = require("./components/AdminComponent.jsx");
+var mainComponent = require("./components/MainComponent.jsx");
+
+var component = React.createFactory(isAdmin ? adminComponent : mainComponent);
 
 var loadFonts = require('./fonts');
 loadFonts();
