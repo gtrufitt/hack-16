@@ -3,13 +3,21 @@ var comms = require("../utils/comms-client")();
 
 var MainComponent = React.createClass({
 
-    // Just to show it's possible to manipulate DOM with JQuery inside React
     componentDidMount: function() {
         console.log("The main component mounted!!")
     },
 
     render: function() {
-        var sendAMessage = function () {
+        return (
+            <div className="reactComponentContainer">
+                <h1>Welcome</h1>
+                <img class="logo" src="./img/logo.jpg" alt=""/>
+                <button onClick={this.onButtonClick}>CLICK ME</button>
+            </div>
+        );
+    },
+
+    onButtonClick: function () {
             comms.sendAMessage({
                 messageType: 'showOnAll',
                 messageData: {
@@ -19,15 +27,6 @@ var MainComponent = React.createClass({
                     }
                 }
             })
-        };
-
-        return (
-            <div className="reactComponentContainer">
-                <h1>Hello {this.props.name}</h1>
-                <p>This is rendered with a React JSX Component! yeah</p>
-                <button onClick={sendAMessage}>Hello There</button>
-            </div>
-        );
     }
 
 });
