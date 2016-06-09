@@ -37,7 +37,7 @@ var MainComponent = React.createClass({
         return (
             <div className="reactComponentContainer">
                 <img className="logo" src="./img/logo.jpg" alt=""/>
-                <ReactCSSTransitionGroup transitionName="activity" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                <ReactCSSTransitionGroup transitionName="activity" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
                     {newComponent}
                 </ReactCSSTransitionGroup>                
             </div>
