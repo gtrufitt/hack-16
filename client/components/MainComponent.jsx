@@ -35,8 +35,7 @@ var MainComponent = React.createClass({
         }
         return (
             <div className="reactComponentContainer">
-                <img className="logo" src="./img/logo.jpg" alt=""/>
-                <h1>Welcome</h1>
+                <img className="logo" src="./img/logo.jpg" alt=""/>                
                 {newComponent}
             </div>
         );
@@ -46,26 +45,23 @@ var MainComponent = React.createClass({
         var jsonEvent = JSON.parse(event.data);
         console.log(jsonEvent);
 
-        if (jsonEvent.messageType === 'setCurrentComponent' ||
-            jsonEvent.messageType === 'getCurrentComponent') {
-
-            this.setState({
-                currentComponent: jsonEvent.messageData.componentName
-            });
+        switch(jsonEvent.messageType){
+            case 'setCurrentComponent':
+            case 'getCurrentComponent': {
+                this.setState({
+                    currentComponent: jsonEvent.messageData.componentName
+                });
+                break;
+            }
+            case 'showOnAll': {
+                var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
+                var clicks = this.state.clicks.slice(0);
+                clicks.push(message);
+                this.setState({clicks});
+                break;
+            }
         }
-
-
-
-        if (jsonEvent.messageType === 'showOnAll') {
-            var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
-            var clicks = this.state.clicks.slice(0);
-            clicks.push(message);
-            this.setState({clicks});
-        }
-
     }
-
-
 
 });
 
