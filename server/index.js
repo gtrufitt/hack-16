@@ -20,4 +20,7 @@ app.get('/admin', function (req, res) {
 
 comms.setupIndexListeners();
 
+app.use(express.static('public'));
+
+
 

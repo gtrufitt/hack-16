@@ -12,6 +12,7 @@ module.exports = function (app) {
 
         // TEST INTERVAL
         setInterval(function () {
+            console.log('ping')
             sendToAll({
                 messageType: 'log',
                 messageData: 'HELLO'
@@ -24,13 +25,22 @@ module.exports = function (app) {
         app.ws('/admin', function(ws) {
             ws.on('message', ingestMessage);
         });
+
+        // TEST INTERVAL
+        setInterval(function () {
+            console.log('ping')
+            sendToAll({
+                messageType: 'log',
+                messageData: 'HELLO'
+            }, aWss);
+        }, 5000);
     }
 
     function ingestMessage(messageObj) {
         console.log(messageObj)
     }
 
-    function sendToAll(messageObj) {
+    function sendToAll(messageObj, aWss) {
         aWss.clients.forEach(function each(client) {
             client.send(JSON.stringify(messageObj))
         });
