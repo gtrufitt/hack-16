@@ -31,15 +31,15 @@ var MainComponent = React.createClass({
     render: function() {
         var newComponent;
         switch(this.state.currentComponent) {
-            case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent"/>; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent"/>; break;
+            case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" ws={this.props.ws} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" ws={this.props.ws} />; break;
         }
         return (
             <div className="reactComponentContainer">
                 <img className="logo" src="./img/logo.jpg" alt=""/>
                 <ReactCSSTransitionGroup transitionName="activity" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
                     {newComponent}
-                </ReactCSSTransitionGroup>                
+                </ReactCSSTransitionGroup>
             </div>
         );
     },
