@@ -1,7 +1,9 @@
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host);
 
+
 var count = 0;
+
 
 ws.onmessage = function (event) {
     var jsonEvent = JSON.parse(event.data);
@@ -20,6 +22,9 @@ ws.onmessage = function (event) {
     }
 };
 
+
+
+
 var sassify = require('sassify');
 var adminCss = require('./admin.scss');
 var indexCss = require('./index.scss');
@@ -32,6 +37,7 @@ if (window.location.pathname.indexOf('admin') > -1) {
     sassify(indexCss);
 }
 
-
+var loadFonts = require('./fonts');
+loadFonts();
 
 console.log("hello");
