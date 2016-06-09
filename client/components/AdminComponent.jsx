@@ -1,16 +1,15 @@
 var React = require("react");
 
-var MainComponent = React.createClass({
+var AdminComponent = React.createClass({
 
     componentDidMount: function() {
-        console.log("The main component mounted!!")
+        console.log("The admin component mounted!!")
     },
 
     render: function() {
         return (
             <div className="reactComponentContainer">
-                <h1>Welcome</h1>
-                <img class="logo" src="./img/logo.jpg" alt=""/>
+                <h1>Admin</h1>
                 <ul id="clicks"></ul>
                 <button onClick={this.onButtonClick}>CLICK ME</button>
             </div>
@@ -18,9 +17,9 @@ var MainComponent = React.createClass({
     },
 
     onButtonClick: function () {
-        this.props.ws.send(JSON.stringify({ messageType: 'sendToAdmin', messageData: 'hello' }))
+        this.props.ws.send(JSON.stringify({ messageType: 'showOnAll', messageData: 'hello' }))
     }
 
 });
 
-exports.MainComponent = MainComponent;
+exports.AdminComponent = AdminComponent;

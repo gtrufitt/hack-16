@@ -38,11 +38,13 @@ console.log("hello");
 
 var React = require("react");
 var ReactDOM = require('react-dom');
-var MainComponent = React.createFactory(require("./components/MainComponent.jsx").MainComponent);
+var component = window.location.pathname.indexOf('admin') > -1 ?
+    React.createFactory(require("./components/AdminComponent.jsx").AdminComponent) :
+    React.createFactory(require("./components/MainComponent.jsx").MainComponent);
 
 ReactDOM.render(
-    MainComponent({
-        name: "Lydia"
+    component({
+        ws: ws
     }),
 
     document.getElementById('react-container')
