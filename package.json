@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "copyfiles": "^0.2.1",
     "express": "^4.4.5",
     "express-ws": "^1.0.0",
     "react": "^15.1.0",
@@ -35,8 +36,9 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "build": "browserify client/main.js -o public/bundle.js",
-    "preinstall": "mkdir -p public",
+    "copyImg": "copyfiles -f client/img/* public/img",
+    "build": "browserify client/main.js -o public/bundle.js && npm run copyImg",
+    "preinstall": "mkdir -p public/img",
     "postinstall": "npm run build",
     "watch": "watchify client/main.js -v -o public/bundle.js"
   },

@@ -22,8 +22,17 @@ ws.onmessage = function (event) {
 
 var sassify = require('sassify');
 var adminCss = require('./admin.scss');
+var indexCss = require('./index.scss');
 
-sassify(adminCss);
+if (window.location.pathname.indexOf('admin') > -1) {
+    console.log(adminCss)
+    sassify(adminCss);
+} else {
+    console.log(indexCss)
+    sassify(indexCss);
+}
+
+
 
 console.log("hello");
 
