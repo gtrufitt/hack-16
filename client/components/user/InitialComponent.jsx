@@ -11,7 +11,13 @@ var InitialComponent = React.createClass({
     render: function() {
         return (
             <div className="initialComponent">
-                <h2>Welcome - initial component</h2>
+                <h2 className="f-header">Welcome</h2>
+                <p className="f-bodyCopy">
+                    You have successfully connected! 
+                </p>
+                <p className="f-bodyCopy">
+                    Waiting for the next activity...
+                </p>
             </div>
         );
     }

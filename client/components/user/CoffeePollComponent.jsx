@@ -19,7 +19,7 @@ var CoffeePollComponent = React.createClass({
     render: function() {
         return (
             <div className="coffeePollComponent">
-                <h2>User Coffee Poll</h2>
+                <h2 className="f-header">User Coffee Poll</h2>
                 {this.state.buttons.map((_, i)=> (
                     <button key={i} onClick={this.onButtonClick.bind(this, i)}>{i}</button>
                 ))}
