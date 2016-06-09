@@ -25,18 +25,38 @@ var AdminComponent = React.createClass({
                 <ul id="clicks">{
                     this.state.clicks.map((click, i) => <p key={i}>{click}</p>)
                 }</ul>
-                <button className="f-headline" onClick={this.onButtonClick}>CLICK ME TO START SESSION</button>
+                <div>
+                    <button className="f-textSans" onClick={this.setToCoffee}>
+                        Set to CoffeePollComponent
+                    </button>
+                </div>
+                <div>
+                    <button className="f-textSans" onClick={this.setToInitial}>
+                        Set to InitialComponent
+                    </button>
+                </div>    
                 <div>{newComponent}</div>
                 
             </div>
         );
     },
 
-    onButtonClick: function () {
+    setToInitial: function () {        
+        this.setCurrentComponent('InitialComponent');
+    },
+
+    setToCoffee: function () {
+        this.setCurrentComponent('CoffeePollComponent');
+    },
+
+    setCurrentComponent: function (component) {
+        this.setState({
+            currentComponent: component
+        });
         comms.sendAMessage({
             messageType: 'setCurrentComponent',
             messageData: {
-                componentName: this.state.currentComponent
+                componentName: component
             }
         });
     },
