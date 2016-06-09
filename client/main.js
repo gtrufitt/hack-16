@@ -26,3 +26,15 @@ var adminCss = require('./admin.scss');
 sassify(adminCss);
 
 console.log("hello");
+
+var React = require("react");
+var ReactDOM = require('react-dom');
+var MainComponent = React.createFactory(require("./components/MainComponent.jsx").MainComponent);
+
+ReactDOM.render(
+    MainComponent({
+        name: "Lydia"
+    }),
+
+    document.getElementById('react-container')
+);
