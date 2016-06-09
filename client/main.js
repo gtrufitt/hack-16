@@ -15,9 +15,8 @@ if (isAdmin) {
     sassify(adminCss);
 } else {
     sassify(indexCss);
+    sassify(mainCss);
 }
-
-sassify(mainCss);
 
 // React
 var React = require("react");

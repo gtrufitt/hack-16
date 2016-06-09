@@ -1,7 +1,9 @@
 @import 'fonts.scss';
 
+$guardian-brand-light: #94b1ca;
+
 body {
-  
+  background-color: #c6c6c6;
   padding: 15px;
 }
 
@@ -13,6 +15,10 @@ ul {
 
 ul li {
   line-height: 1.4;
+}
+
+.admin-btn {
+  background-color: $guardian-brand-light;
 }
 
 .plot {
@@ -27,4 +33,22 @@ ul li {
   width: 10px;
   height: 10px;
   position: absolute;
+}
+
+.activity--admin-enter {
+  opacity: 0.01;
+}
+
+.activity--admin-enter.activity--admin-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in;
+}
+
+.activity--admin-leave {
+  opacity: 1;
+}
+
+.activity--admin-leave.activity--admin-leave-active {
+  opacity: 0.01;
+  transition: opacity 700ms ease-in;
 }

@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 var InitialComponent = require("./admin/InitialComponent.jsx");
@@ -9,8 +10,6 @@ var AdminComponent = React.createClass({
 
     getInitialState: function () {
         return {
-            count: 0,
-            clicks: [],
             currentComponent: "InitialComponent",
             usersConnected: 0
         }
@@ -23,27 +22,27 @@ var AdminComponent = React.createClass({
     render: function() {
         var newComponent;
         switch(this.state.currentComponent) {
-            case 'InitialComponent': newComponent = <InitialComponent {...this.props} />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent {...this.props} />; break;
+            case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
         }
         return (
             <div className="reactComponentContainer">
                 <h1 className="f-header">Admin</h1>
-                <div className="count">{this.state.count}</div>
-                <ul id="clicks">{
-                    this.state.clicks.map((click, i) => <p key={i}>{click}</p>)
-                }</ul>
                 <div>
-                    <button className="f-textSans" onClick={this.setToCoffee}>
-                        Set to CoffeePollComponent
-                    </button>
-                </div>
-                <div>
-                    <button className="f-textSans" onClick={this.setToInitial}>
+                    <button className="admin-btn f-textSans" onClick={this.setToInitial}>
                         Set to InitialComponent
                     </button>
                 </div>
-                <div>{newComponent}</div>
+                <div>
+                    <button className="admin-btn f-textSans" onClick={this.setToCoffee}>
+                        Set to CoffeePollComponent
+                    </button>
+                </div>                
+                <div>
+                    <ReactCSSTransitionGroup transitionName="activity--admin" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+                        {newComponent}
+                    </ReactCSSTransitionGroup>    
+                </div>
                 <p>Users connected: {this.state.usersConnected}</p>
             </div>
         );
@@ -85,22 +84,6 @@ var AdminComponent = React.createClass({
                 usersConnected: this.state.usersConnected + 1
             })
         }
-
-        // var jsonEvent = JSON.parse(event.data);
-        // console.log(jsonEvent);
-        // if (jsonEvent.messageType === 'log') {
-        //     this.setState({
-        //         count: this.state.count + 1
-        //     });
-        // }
-        //
-        // if (jsonEvent.messageType === 'showOnAll') {
-        //     var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
-        //     var clicks = this.state.clicks.slice(0);
-        //     clicks.push(message);
-        //     this.setState({clicks});
-        // }
-
     }
 
 });
