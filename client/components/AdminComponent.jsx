@@ -1,5 +1,6 @@
 var React = require("react");
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
+var comms = require("../utils/comms-client")();
 
 var AdminComponent = React.createClass({
 
@@ -24,16 +25,20 @@ var AdminComponent = React.createClass({
                 <ul id="clicks">{
                     this.state.clicks.map((click, i) => <p key={i}>{click}</p>)
                 }</ul>
-                <button className="f-headline" onClick={this.onButtonClick}>CLICK ME</button>
+                <button className="f-headline" onClick={this.onButtonClick}>CLICK ME TO START SESSION</button>
                 <div>{newComponent}</div>
                 
             </div>
-
         );
     },
 
     onButtonClick: function () {
-        this.props.ws.send(JSON.stringify({ messageType: 'showOnAll', messageData: 'hello' }))
+        comms.sendAMessage({
+            messageType: 'setCurrentComponent',
+            messageData: {
+                componentName: this.state.currentComponent
+            }
+        });
     },
 
     onMessage: function (event) {
