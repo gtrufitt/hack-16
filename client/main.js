@@ -5,10 +5,8 @@ var adminCss = require('./admin.scss');
 var indexCss = require('./index.scss');
 
 if (window.location.pathname.indexOf('admin') > -1) {
-    console.log(adminCss)
     sassify(adminCss);
 } else {
-    console.log(indexCss)
     sassify(indexCss);
 }
 
