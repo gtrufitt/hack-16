@@ -1,4 +1,5 @@
 var React = require("react");
+var comms = require("../utils/comms-client")();
 
 var MainComponent = React.createClass({
 
@@ -8,10 +9,23 @@ var MainComponent = React.createClass({
     },
 
     render: function() {
+        var sendAMessage = function () {
+            comms.sendAMessage({
+                messageType: 'showOnAll',
+                messageData: {
+                    messageType: 'log',
+                    messageData: {
+                        main: 'testData'
+                    }
+                }
+            })
+        };
+
         return (
             <div className="reactComponentContainer">
                 <h1>Hello {this.props.name}</h1>
                 <p>This is rendered with a React JSX Component! yeah</p>
+                <button onClick={sendAMessage}>Hello There</button>
             </div>
         );
     }

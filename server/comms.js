@@ -7,33 +7,12 @@ module.exports = function (app) {
         app.ws('/', function(ws) {
             ws.on('message', ingestMessage);
         });
-
-        var aWss = expressWs.getWss('/');
-
-        // TEST INTERVAL
-        setInterval(function () {
-            console.log('ping')
-            sendToAll({
-                messageType: 'log',
-                messageData: 'HELLO'
-            });
-        }, 5000);
-
     }
 
     function setupAdminListeners() {
         app.ws('/admin', function(ws) {
             ws.on('message', ingestMessage);
         });
-
-        // TEST INTERVAL
-        setInterval(function () {
-            console.log('ping')
-            sendToAll({
-                messageType: 'log',
-                messageData: 'HELLO'
-            });
-        }, 5000);
     }
 
     function ingestMessage(messageObj) {
