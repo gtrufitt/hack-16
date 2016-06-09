@@ -25,8 +25,8 @@ var MainComponent = React.createClass({
         }
         return (
             <div className="reactComponentContainer">
+                <img className="logo" src="./img/logo.jpg" alt=""/>
                 <h1>Welcome</h1>
-                <img class="logo" src="./img/logo.jpg" alt=""/>
                 {newComponent}
             </div>
         );
