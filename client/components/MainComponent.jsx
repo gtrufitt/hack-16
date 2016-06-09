@@ -1,6 +1,5 @@
 var React = require("react");
 
-
 var CoffeePollComponent = require("./user/CoffeePollComponent.jsx");
 var InitialComponent = require("./user/InitialComponent.jsx");
 
@@ -13,8 +12,18 @@ var MainComponent = React.createClass({
     },
 
     componentDidMount: function() {
-        this.props.ws.onmessage = this.onMessage;
-        console.log("The main component mounted!!")
+
+        var ws = this.props.ws;
+        
+        ws.onmessage = this.onMessage;
+        console.log("The main component mounted!!");
+
+        ws.onopen = function() {
+
+            ws.send(JSON.stringify({
+                messageType: 'getCurrentComponent'
+            }));
+        };
     },
 
     render: function() {
@@ -36,11 +45,15 @@ var MainComponent = React.createClass({
         var jsonEvent = JSON.parse(event.data);
         console.log(jsonEvent);
 
-        if (jsonEvent.messageType === 'setCurrentComponent') {
+        if (jsonEvent.messageType === 'setCurrentComponent' ||
+            jsonEvent.messageType === 'getCurrentComponent') {
+
             this.setState({
                 currentComponent: jsonEvent.messageData.componentName
             });
         }
+
+
 
         if (jsonEvent.messageType === 'showOnAll') {
             var message = 'SOMEONE CLICKED: ' + jsonEvent.messageData;
