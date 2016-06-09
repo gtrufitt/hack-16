@@ -1,8 +1,9 @@
 // CSS
-
 var sassify = require('sassify');
 var adminCss = require('./admin.scss');
 var indexCss = require('./index.scss');
+var mainCss = require('./main.scss');
+
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host)
 
@@ -14,10 +15,12 @@ if (isAdmin) {
     sassify(indexCss);
 }
 
-// React
+sassify(mainCss);
 
+// React
 var React = require("react");
 var ReactDOM = require('react-dom');
+
 var adminComponent = require("./components/AdminComponent.jsx");
 var mainComponent = require("./components/MainComponent.jsx");
 
