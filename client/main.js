@@ -3,6 +3,8 @@
 var sassify = require('sassify');
 var adminCss = require('./admin.scss');
 var indexCss = require('./index.scss');
+var host = location.origin.replace(/^http/, 'ws')
+var ws = new WebSocket(host)
 
 if (window.location.pathname.indexOf('admin') > -1) {
     sassify(adminCss);

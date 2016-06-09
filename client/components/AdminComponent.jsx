@@ -1,11 +1,13 @@
 var React = require("react");
+var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 
 var AdminComponent = React.createClass({
 
     getInitialState: function () {
         return {
             count: 0,
-            clicks: []
+            clicks: [],
+            currentComponent: "CoffeePollComponent"
         }
     },
 
@@ -13,7 +15,8 @@ var AdminComponent = React.createClass({
         this.props.ws.onmessage = this.onMessage;
     },
 
-    render: function() {
+    render: function() {        
+        var newComponent = <CoffeePollComponent />;
         return (
             <div className="reactComponentContainer">
                 <h1 className="f-header">Admin</h1>
@@ -22,7 +25,10 @@ var AdminComponent = React.createClass({
                     this.state.clicks.map((click, i) => <p key={i}>{click}</p>)
                 }</ul>
                 <button className="f-headline" onClick={this.onButtonClick}>CLICK ME</button>
+                <div>{newComponent}</div>
+                
             </div>
+
         );
     },
 
