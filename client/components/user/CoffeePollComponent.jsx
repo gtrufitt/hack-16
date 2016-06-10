@@ -36,7 +36,7 @@ var CoffeePollComponent = React.createClass({
                 {!this.state.numberOfCoffees && this.state.numbers.map((_, i)=> (
                     <button
                         key={i}
-                        className="admin-btn f-textSans"
+                        className="user-button f-textSans"
                         onClick={this.onButtonClick.bind(this, i)}>{
                         i || "none"
                     }</button>
@@ -70,7 +70,7 @@ var CoffeePollComponent = React.createClass({
     },
 
     onMessage: function(event) {
-        
+
         var jsonEvent = JSON.parse(event.data);
         if (jsonEvent.messageData && jsonEvent.messageData.data) {
             var data = jsonEvent.messageData.data;
