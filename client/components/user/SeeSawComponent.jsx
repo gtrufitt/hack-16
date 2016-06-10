@@ -31,18 +31,20 @@ var SeeSawComponent = React.createClass({
 
     voteBremain: function() {
         comms.sendAMessage({
-            messageType: 'bremainVote',
+            messageType: 'sendToAdmin',
             messageData: {
-                vote: 1
+                messageType: 'bremainVote',
+                messageData: {}
             }
         });
     },
 
     voteBrexit: function() {
         comms.sendAMessage({
-            messageType: 'brexitVote',
+            messageType: 'sendToAdmin',
             messageData: {
-                vote: 1
+                messageType: 'brexitVote',
+                messageData: {}
             }
         });
     }

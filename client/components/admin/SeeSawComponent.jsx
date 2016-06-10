@@ -18,6 +18,7 @@ var SeeSawBeam = React.createClass({
 var SeeSawComponent = React.createClass({
     
     getInitialState: function() {
+        this.props.ws.onmessage = this.onMessage;
         return {
             brexit: 0,
             remain: 0
@@ -41,8 +42,6 @@ var SeeSawComponent = React.createClass({
         if (rp > bp) {
             rotation = rp * 0.15;
         }
-
-        console.log(rotation);
         return (
             <div className="SeeSawComponent">
                 <h2 className="SeeSawHeading">EU Referendum Tracker</h2>
@@ -53,6 +52,35 @@ var SeeSawComponent = React.createClass({
                 </div>
             </div>
         );
+    },
+
+    onMessage: function (event) {
+        
+
+        var jsonEvent = JSON.parse(event.data);
+
+
+        console.log('got something');
+
+        if (jsonEvent.messageType === 'brexitVote') {
+            
+            var newState = {
+                brexit: this.state.brexit + 1,
+                remain: this.state.remain
+            };
+            
+            this.setState(newState);
+        }
+
+        if (jsonEvent.messageType === 'bremainVote') {
+            
+            var newState = {
+                brexit: this.state.brexit,
+                remain: this.state.remain + 1
+            };
+            
+            this.setState(newState);
+        }
     }
 
 });
