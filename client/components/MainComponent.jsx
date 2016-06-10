@@ -34,7 +34,7 @@ var MainComponent = React.createClass({
         var newComponent;
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" ws={this.props.ws} />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" ws={this.props.ws} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" ref="CoffeePollComponent" ws={this.props.ws} />; break;
             case 'SpotTheBallComponent': newComponent = <SpotTheBallComponent key="SpotTheBallComponent" ws={this.props.ws} />; break;
             case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
@@ -67,6 +67,12 @@ var MainComponent = React.createClass({
                 break;
             }
             case 'ping': {
+                break;
+            }
+            case 'coffeeVote': {
+                if(this.refs.CoffeePollComponent){
+                    this.refs.CoffeePollComponent.onMessage(event);
+                }
                 break;
             }
         }

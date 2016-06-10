@@ -13,7 +13,6 @@ var CoffeePollComponent = React.createClass({
 
     componentDidMount: function() {
         console.log("The coffee poll component mounted!!")
-        this.props.ws.onmessage = this.onMessage;
     },
 
     render: function() {
@@ -31,7 +30,6 @@ var CoffeePollComponent = React.createClass({
 
         return (
             <div className="coffeePollComponent">
-                <h2 className="f-header">Question 1</h2>
                 <h3 className="f-header">How many coffees have you had today?</h3>
                 {!this.state.numberOfCoffees && this.state.numbers.map((_, i)=> (
                     <button
