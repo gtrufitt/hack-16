@@ -57,7 +57,7 @@ var CoffeePollComponent = React.createClass({
     onMessage: function(event) {
         var jsonEvent = JSON.parse(event.data);
 
-        if (jsonEvent.messageType === 'coffeeVote' && !jsonEvent.messageData.data) {
+        if (jsonEvent.messageType === 'coffeeVote' && jsonEvent.messageData && !jsonEvent.messageData.data) {
             var number = jsonEvent.messageData.numberOfCoffees;
             var newState = {};
             newState['had'+ number] = this.state['had'+ number] + 1;

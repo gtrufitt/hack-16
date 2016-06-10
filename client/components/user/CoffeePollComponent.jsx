@@ -70,11 +70,14 @@ var CoffeePollComponent = React.createClass({
     },
 
     onMessage: function(event) {
+        
         var jsonEvent = JSON.parse(event.data);
-        var data = jsonEvent.messageData.data;
-        if (jsonEvent.messageType === 'coffeeVote' && data) {
-            data.width = undefined;
-            this.setState(data);
+        if (jsonEvent.messageData && jsonEvent.messageData.data) {
+            var data = jsonEvent.messageData.data;
+            if (jsonEvent.messageType === 'coffeeVote' && data) {
+                data.width = undefined;
+                this.setState(data);
+            }
         }
     }
 
