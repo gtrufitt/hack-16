@@ -10,8 +10,8 @@ var SeeSawComponent = React.createClass({
 
     render: function() {
         return (
-            <div className="seeSawComponent">
-                <h2>SeeSawComponent</h2>
+            <div className="SeeSawComponent">
+                <h2 className="SeeSawHeading">EU Referendum Tracker</h2>
             </div>
         );
     }

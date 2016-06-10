@@ -7,3 +7,23 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.SeeSawComponent {
+  background-image: url(./img/seesaw-background.png);
+  height: 640px;
+  width: 400px;
+}
+
+.admin--component {
+	.SeeSawComponent {
+  		margin: 0 auto;
+  		margin-top: -30px;
+  	}
+
+  	.SeeSawHeading {
+  		margin: 0 auto;
+  		padding-top: 12px;
+  		width: 70%;
+  		color: $guardian-comment-main;
+  	}
+}
