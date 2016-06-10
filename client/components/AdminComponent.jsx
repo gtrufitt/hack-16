@@ -80,10 +80,16 @@ var AdminComponent = React.createClass({
     onMessage: function (event) {
         var jsonEvent = JSON.parse(event.data);
 
-        if (jsonEvent.messageType === 'userConnected') {
-            this.setState({
-                usersConnected: this.state.usersConnected + 1
-            })
+        switch(jsonEvent.messageType){
+            case 'userConnected': {
+                this.setState({
+                    usersConnected: this.state.usersConnected + 1
+                })
+                break;
+            }
+            case 'ping': {
+                break;
+            }
         }
     }
 

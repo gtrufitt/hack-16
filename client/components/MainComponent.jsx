@@ -46,7 +46,6 @@ var MainComponent = React.createClass({
 
     onMessage: function(event) {
         var jsonEvent = JSON.parse(event.data);
-        console.log(jsonEvent);
 
         switch(jsonEvent.messageType){
             case 'setCurrentComponent':
@@ -61,6 +60,9 @@ var MainComponent = React.createClass({
                 var clicks = this.state.clicks.slice(0);
                 clicks.push(message);
                 this.setState({clicks});
+                break;
+            }
+            case 'ping': {
                 break;
             }
         }
