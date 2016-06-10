@@ -16,7 +16,7 @@ var AdminComponent = React.createClass({
     },
 
     componentDidMount: function() {
-        // this.props.ws.onmessage = this.onMessage;
+        this.props.ws.onmessage = this.onMessage;
     },
 
     render: function() {
@@ -76,7 +76,6 @@ var AdminComponent = React.createClass({
     },
 
     onMessage: function (event) {
-
         var jsonEvent = JSON.parse(event.data);
 
         switch(jsonEvent.messageType){

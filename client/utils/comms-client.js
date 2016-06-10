@@ -5,18 +5,13 @@ var comms = function() {
     ws.onmessage = function (event) {
         var jsonEvent = JSON.parse(event.data);
 
-        console.log('gotAMessage', jsonEvent);
-
         switch(jsonEvent.messageType) {
             case 'log':
-                console.log(jsonEvent.messageData);
                 break;
             case 'updateState':
-                console.log('update state');
                 updateState();
                 break;
             case 'ringABell':
-                console.log('you rang?')
                 break;
         }
     };
