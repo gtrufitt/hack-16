@@ -26,26 +26,31 @@ var AdminComponent = React.createClass({
             case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
         }
         return (
-            <div className="reactComponentContainer">
+            <div className="reactComponentContainer admin--container">
                 <header className="header">
                     <img className="logo" src="./img/logo.jpg" alt=""/>
                 </header>
-                <div>
-                    <button className="admin-btn f-textSans" onClick={this.setToInitial}>
-                        Set to InitialComponent
-                    </button>
-                </div>
-                <div>
-                    <button className="admin-btn f-textSans" onClick={this.setToCoffee}>
-                        Set to CoffeePollComponent
-                    </button>
-                </div>                
-                <div>
+
+                <div className="admin--component">
                     <ReactCSSTransitionGroup transitionName="activity--admin" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
                         {newComponent}
                     </ReactCSSTransitionGroup>    
                 </div>
-                <p>Users connected: {this.state.usersConnected}</p>
+                <footer className="footer">
+                    <div className="admin-btn--wrap">
+                        <div>
+                            <button className="admin-btn f-textSans" onClick={this.setToInitial}>
+                                START!
+                            </button>
+                        </div>
+                        <div>
+                            <button className="admin-btn f-textSans" onClick={this.setToCoffee}>
+                                POLL
+                            </button>
+                        </div>
+                    </div>
+                    <p className="admin--connected">Connected: {this.state.usersConnected}</p>
+                </footer>
             </div>
         );
     },

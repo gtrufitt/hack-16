@@ -1,8 +1,9 @@
+@import 'vars.scss';
+
 body {
   font-family: 'Guardian Egyptian Web', Georgia, serif;
-  background-color: #005689;
-}
-
-.header {
-  background-color: #005689;
+  background-color: $guardian-brand;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
 }
