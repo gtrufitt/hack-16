@@ -3,6 +3,7 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 var InitialComponent = require("./admin/InitialComponent.jsx");
+var SeeSawComponent = require("./admin/SeeSawComponent.jsx");
 
 var comms = require("../utils/comms-client")();
 
@@ -24,6 +25,7 @@ var AdminComponent = React.createClass({
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
             case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
+            case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
         return (
             <div className="reactComponentContainer admin--container">
@@ -48,6 +50,11 @@ var AdminComponent = React.createClass({
                                 POLL
                             </button>
                         </div>
+                        <div>
+                            <button className="admin-btn f-textSans" onClick={this.setToSeeSaw}>
+                                SEE-SAW
+                            </button>
+                        </div>
                     </div>
                     <p className="admin--connected">Connected: {this.state.usersConnected}</p>
                 </footer>
@@ -67,6 +74,12 @@ var AdminComponent = React.createClass({
         });
     },
 
+    setToSeeSaw: function () {
+        this.setState({
+            currentComponent: 'SeeSawComponent'
+        });
+    },
+
     componentDidUpdate: function () {
         this.props.ws.send(JSON.stringify({
             messageType: 'setCurrentComponent',
@@ -74,12 +87,6 @@ var AdminComponent = React.createClass({
                 componentName: this.state.currentComponent
             }
         }));
-    },
-
-    onButtonClick: function () {
-        this.setState({
-            currentComponent: 'CoffeePollComponent'
-        });
     },
 
     onMessage: function (event) {

@@ -3,6 +3,7 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var CoffeePollComponent = require("./user/CoffeePollComponent.jsx");
 var InitialComponent = require("./user/InitialComponent.jsx");
+var SeeSawComponent = require("./user/SeeSawComponent.jsx");
 
 var MainComponent = React.createClass({
 
@@ -33,6 +34,7 @@ var MainComponent = React.createClass({
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" ws={this.props.ws} />; break;
             case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" ws={this.props.ws} />; break;
+            case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
         return (
             <div className="reactComponentContainer">
