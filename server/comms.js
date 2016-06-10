@@ -48,9 +48,6 @@ module.exports = function (app) {
     }
 
     function ingestUserMessage(messageObj) {
-        console.log('ingest user message');
-        console.log(messageObj)
-        console.log(messageObj.messageType)
         // Message passed as stringified JSON
         messageObj = JSON.parse(messageObj);
 
@@ -78,7 +75,6 @@ module.exports = function (app) {
 
     function setCurrentComponent(messageObj) {
         currentComponent = messageObj.componentName;
-        console.log('setting component to ' + messageObj.componentName);
         sendToAll({
             messageType: 'setCurrentComponent',
             messageData: {
@@ -89,7 +85,6 @@ module.exports = function (app) {
 
 
     function getCurrentComponent() {
-        console.log('get component request ');
         sendToAll({
             messageType: 'getCurrentComponent',
             messageData: {
@@ -125,6 +120,18 @@ module.exports = function (app) {
             client.send(JSON.stringify(messageObj))
         });
     }
+
+    function keepAlivePing() {
+        sendToAll({
+            messageType: 'ping'
+        })
+        sendToAdmin({
+            messageType: 'ping'
+        })
+    }
+
+    setInterval(keepAlivePing, 2000);
+
 
     return {
         setupIndexListeners: setupIndexListeners,

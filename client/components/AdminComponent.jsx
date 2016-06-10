@@ -16,7 +16,7 @@ var AdminComponent = React.createClass({
     },
 
     componentDidMount: function() {
-        // this.props.ws.onmessage = this.onMessage;
+        this.props.ws.onmessage = this.onMessage;
     },
 
     render: function() {
@@ -27,7 +27,9 @@ var AdminComponent = React.createClass({
         }
         return (
             <div className="reactComponentContainer">
-                <h1 className="f-header">Admin</h1>
+                <header className="header">
+                    <img className="logo" src="./img/logo.jpg" alt=""/>
+                </header>
                 <div>
                     <button className="admin-btn f-textSans" onClick={this.setToInitial}>
                         Set to InitialComponent
@@ -76,13 +78,18 @@ var AdminComponent = React.createClass({
     },
 
     onMessage: function (event) {
-
         var jsonEvent = JSON.parse(event.data);
 
-        if (jsonEvent.messageType === 'userConnected') {
-            this.setState({
-                usersConnected: this.state.usersConnected + 1
-            })
+        switch(jsonEvent.messageType){
+            case 'userConnected': {
+                this.setState({
+                    usersConnected: this.state.usersConnected + 1
+                })
+                break;
+            }
+            case 'ping': {
+                break;
+            }
         }
     }
 

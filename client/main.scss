@@ -1,5 +1,24 @@
 @import 'fonts.scss';
 
+body {
+  font-family: "Helvetica Neue", helvetica, arial;
+  padding: 0;
+}
+
+.wrapper {
+  background-color: #005689;
+  color: #fff;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo {
+  width: 100%;
+}
+
 .activity-enter {
   opacity: 0.01;
 }

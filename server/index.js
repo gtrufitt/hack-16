@@ -11,7 +11,7 @@ var connections = []; // Keeps track of all connections
 // =============================================================================
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html', {"root": 'client'});
+    res.sendFile('main.html', {"root": 'client'});
 });
 
 app.get('/admin', function (req, res) {
