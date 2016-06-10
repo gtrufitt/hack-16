@@ -1,13 +1,14 @@
 @import 'fonts.scss';
-
-$guardian-brand-light: #94b1ca;
-
-body {
-  padding: 15px;
-}
+@import 'vars.scss';
 
 .logo {
   width: 400px;
+}
+
+.footer {
+  background-color: $guardian-brand-dark;
+  padding: 15px;
+  margin-top: auto;
 }
 
 ul {
@@ -21,7 +22,12 @@ ul li {
 }
 
 .admin-btn {
-  background-color: $guardian-brand-light;
+  border: 1px solid $guardian-brand-light;
+  background-color: $guardian-brand;
+  border-radius: 21px;
+  padding: 5px 15px;
+  color: #fff;
+  font-size: 13px;
 }
 
 .plot {
@@ -36,6 +42,16 @@ ul li {
   width: 10px;
   height: 10px;
   position: absolute;
+}
+
+.admin--container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin--component {
+  padding: 15px;
 }
 
 .activity--admin-enter {
@@ -54,4 +70,21 @@ ul li {
 .activity--admin-leave.activity--admin-leave-active {
   opacity: 0.01;
   transition: opacity 700ms ease-in;
+}
+
+// Footer
+
+.admin--connected {
+  float: left;
+  font-size: 75px;
+  margin: 0;
+}
+
+.admin-btn--wrap {
+  float: right;
+
+  div {
+    display: inline-block;
+    margin-left: 10px;
+  }
 }
