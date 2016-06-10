@@ -2,6 +2,8 @@
 
 var React = require("react");
 
+var comms = require("../../utils/comms-client")();
+
 var SeeSawBeam = React.createClass({
     render : function(){
         return(
@@ -19,9 +21,30 @@ var SeeSawComponent = React.createClass({
         return (
             <div className="SeeSawComponent">
                 <h2 className="SeeSawHeading">EU Referendum Tracker</h2>
+                <p className="f-bodyHeading seesaw-label">How will you vote?</p>
+                <button className="user-button user-button--brexit f-sans" onClick={this.voteBrexit}>Brexit Baby!</button>
+                <button className="user-button user-button--bremain f-sans" onClick={this.voteBremain}>Bremain Bruv!</button>
                 <SeeSawBeam/>
             </div>
         );
+    },
+
+    voteBremain: function() {
+        comms.sendAMessage({
+            messageType: 'bremainVote',
+            messageData: {
+                vote: 1
+            }
+        });
+    },
+
+    voteBrexit: function() {
+        comms.sendAMessage({
+            messageType: 'brexitVote',
+            messageData: {
+                vote: 1
+            }
+        });
     }
 
 });

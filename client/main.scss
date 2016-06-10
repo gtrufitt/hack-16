@@ -36,3 +36,44 @@ body {
   opacity: 0.01;
   transition: opacity 700ms ease-in;
 }
+
+.seesaw-label {
+  padding-top: 75px;
+  padding-left: 12px;
+}
+
+.user-button {
+  border: 1px solid #fff;
+  
+  border-radius: 21px;
+  padding: 5px 15px;
+  
+  font-size: 13px;  
+  z-index: 10;
+}
+
+.user-button.user-button--bremain {
+  background-color: $guardian-features-support-4;
+  border-color: #e6711b;
+  color: #ddd;
+  font-weight: bold;
+  position: absolute;
+  left: 72px;
+}
+
+.user-button.user-button--brexit {
+  background-color: $guardian-comment-support-3;
+  border-color: #efa;
+  color: #222;
+  font-weight: bold;
+  position: absolute;
+  left: 215px;  
+}
+
+.user-button.user-button--bremain:active {
+  background-color: #111;  
+}
+
+.user-button.user-button--brexit:active {
+  background-color: #111;  
+}

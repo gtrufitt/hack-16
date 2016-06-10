@@ -24,7 +24,7 @@ var AdminComponent = React.createClass({
         var coffeeProps = {ws: this.props.ws, notifyResults: this.notifyResults};
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...coffeeProps} />; break;
             case 'SpotTheBallComponent': newComponent = <SpotTheBallComponent key="SpotTheBallComponent" {...this.props} />; break;
             case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }

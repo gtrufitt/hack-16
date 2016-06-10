@@ -30,6 +30,18 @@ body {
 		margin: 0 auto;
 		margin-top: -30px;
     position: relative;
+
+      .results {
+        position: absolute;
+        left: 30px;
+        top: 340px;
+      .result {
+        position: absolute;
+        &.remain {
+          left: 280px;
+        }
+      }
+      }
 	}
 
 	.SeeSawHeading {
@@ -47,6 +59,7 @@ body {
     position: absolute;
     top: 158px;
     left: 21px;
+    z-index: 0;
   }
 }
 
