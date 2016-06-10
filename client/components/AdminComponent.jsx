@@ -5,8 +5,6 @@ var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 var InitialComponent = require("./admin/InitialComponent.jsx");
 var SeeSawComponent = require("./admin/SeeSawComponent.jsx");
 
-var comms = require("../utils/comms-client")();
-
 var AdminComponent = React.createClass({
 
     getInitialState: function () {
@@ -22,9 +20,10 @@ var AdminComponent = React.createClass({
 
     render: function() {
         var newComponent;
+        var coffeeProps = {ws: this.props.ws, notifyResults: this.notifyResults};
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
-            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
+            case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...coffeeProps} />; break;
             case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
         return (
@@ -85,6 +84,15 @@ var AdminComponent = React.createClass({
             messageType: 'setCurrentComponent',
             messageData: {
                 componentName: this.state.currentComponent
+            }
+        }));
+    },
+
+    notifyResults: function (data) {
+        this.props.ws.send(JSON.stringify({
+            messageType: 'coffeeVote',
+            messageData: {
+                data : data
             }
         }));
     },

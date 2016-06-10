@@ -8,11 +8,7 @@ var CoffeePollComponent = React.createClass({
 
     getInitialState: function(){
         var numbers = [0,1,2,3,4,5,6,7];
-        var state = {numbers, width:500};
-        for(var i in numbers){
-            state['had' + i] = 0;
-        }
-        return state
+        return {numbers, width:500}
     },
 
     componentDidMount: function() {
@@ -21,14 +17,17 @@ var CoffeePollComponent = React.createClass({
     },
 
     render: function() {
+        var hasResults = this.state.had0 !== undefined;
         var that = this;
-        var totalVotes = this.state.numbers.map(i => this.state["had" + i]);
-        var lessCaffeinated = 0;
-        var total = totalVotes.reduce(function(previousValue, currentValue, currentIndex) {
-            if (currentIndex === that.state.numberOfCoffees) lessCaffeinated = previousValue;
-            return previousValue + currentValue;
-        });
-        var p = Math.round(10000 * lessCaffeinated/Math.max(total - 1, 1)) / 100;
+        if(hasResults){
+            var totalVotes = this.state.numbers.map(i => this.state["had" + i]);
+            var lessCaffeinated = 0;
+            var total = totalVotes.reduce(function(previousValue, currentValue, currentIndex) {
+                if (currentIndex === that.state.numberOfCoffees) lessCaffeinated = previousValue;
+                return previousValue + currentValue;
+            });
+            var p = Math.min(Math.round(10000 * lessCaffeinated/Math.max(total - 1, 1)) / 100, 100);
+        }
 
         return (
             <div className="coffeePollComponent">
@@ -39,21 +38,22 @@ var CoffeePollComponent = React.createClass({
                         key={i}
                         className="admin-btn f-textSans"
                         onClick={this.onButtonClick.bind(this, i)}>{
-                        i || "tea"
+                        i || "none"
                     }</button>
                 ))}
                 {!!this.state.numberOfCoffees &&
-                <div>
+                    <div>
                     <p>
                         Thanks for voting!
-                    </p>
-                    <p>
-                        You are more caffeinated than <strong>{p}%</strong> of today's hackers.
-                    </p>
-                    <p>
+                    </p><p>
                         Watch for the full results on the big screen...
                     </p>
-                </div>
+                    {!!hasResults &&
+                        <p>
+                            You are more caffeinated than <strong>{p}%</strong> of today's hackers.
+                        </p>
+                    }
+                    </div>
                 }
             </div>
         );
@@ -71,12 +71,10 @@ var CoffeePollComponent = React.createClass({
 
     onMessage: function(event) {
         var jsonEvent = JSON.parse(event.data);
-
-        if (jsonEvent.messageType === 'coffeeVote') {
-            var number = jsonEvent.messageData.numberOfCoffees;
-            var newState = {};
-            newState['had'+ number] = this.state['had'+ number] + 1;
-            this.setState(newState);
+        var data = jsonEvent.messageData.data;
+        if (jsonEvent.messageType === 'coffeeVote' && data) {
+            data.width = undefined;
+            this.setState(data);
         }
     }
 
