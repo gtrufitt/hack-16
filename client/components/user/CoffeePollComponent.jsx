@@ -28,7 +28,7 @@ var CoffeePollComponent = React.createClass({
             if (currentIndex === that.state.numberOfCoffees) lessCaffeinated = previousValue;
             return previousValue + currentValue;
         });
-        var p = 100 * lessCaffeinated/(Math.max(total - 1, 1));
+        var p = Math.round(10000 * lessCaffeinated/Math.max(total - 1, 1)) / 100;
 
         return (
             <div className="coffeePollComponent">
@@ -48,10 +48,10 @@ var CoffeePollComponent = React.createClass({
                         Thanks for voting!
                     </p>
                     <p>
-                        You are more caffeinated than {p}% of today's hackers.
+                        You are more caffeinated than <strong>{p}%</strong> of today's hackers.
                     </p>
                     <p>
-                        Watch for the results on the big screen...
+                        Watch for the full results on the big screen...
                     </p>
                 </div>
                 }
