@@ -34,9 +34,17 @@ var CoffeePollComponent = React.createClass({
     },
 
     render: function() {
+        var state = this.state;
+        var totalVotes = state.numbers.map(function (i) {
+            return state["had" + i];
+        });
+        var total = totalVotes.reduce(function (previousValue, currentValue, currentIndex) {
+            return previousValue + (currentValue * currentIndex);
+        });
         return (
             <div className="admin coffeePollComponent">
                 <h2>Coffee Poll</h2>
+                <h4>Coffees consumed: {total}</h4>
                 <BarChart
                     ylabel='Coffee drinkers'
                     width={this.state.width}
