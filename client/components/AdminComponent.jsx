@@ -76,7 +76,6 @@ var AdminComponent = React.createClass({
     },
 
     onMessage: function (event) {
-
         var jsonEvent = JSON.parse(event.data);
 
         if (jsonEvent.messageType === 'userConnected') {
