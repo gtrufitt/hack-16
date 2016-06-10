@@ -1,11 +1,10 @@
 var React = require("react");
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+var SpotTheBallComponent = require("./admin/spotTheBall.jsx");
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 var InitialComponent = require("./admin/InitialComponent.jsx");
 var SeeSawComponent = require("./admin/SeeSawComponent.jsx");
-
-var comms = require("../utils/comms-client")();
 
 var AdminComponent = React.createClass({
 
@@ -22,9 +21,11 @@ var AdminComponent = React.createClass({
 
     render: function() {
         var newComponent;
+        var coffeeProps = {ws: this.props.ws, notifyResults: this.notifyResults};
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
             case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
+            case 'SpotTheBallComponent': newComponent = <SpotTheBallComponent key="SpotTheBallComponent" {...this.props} />; break;
             case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
         return (
@@ -51,6 +52,11 @@ var AdminComponent = React.createClass({
                             </button>
                         </div>
                         <div>
+                            <button className="admin-btn f-textSans" onClick={this.setToSpotTheBall}>
+                                SPOT THE BALL
+                            </button>
+                        </div>
+                        <div>
                             <button className="admin-btn f-textSans" onClick={this.setToSeeSaw}>
                                 SEE-SAW
                             </button>
@@ -74,17 +80,31 @@ var AdminComponent = React.createClass({
         });
     },
 
+
+    setToSpotTheBall: function () {
+        this.setState({
+            currentComponent: 'SpotTheBallComponent'
+        });
+    },
     setToSeeSaw: function () {
         this.setState({
             currentComponent: 'SeeSawComponent'
         });
     },
-
     componentDidUpdate: function () {
         this.props.ws.send(JSON.stringify({
             messageType: 'setCurrentComponent',
             messageData: {
                 componentName: this.state.currentComponent
+            }
+        }));
+    },
+
+    notifyResults: function (data) {
+        this.props.ws.send(JSON.stringify({
+            messageType: 'coffeeVote',
+            messageData: {
+                data : data
             }
         }));
     },
