@@ -36,9 +36,11 @@ body {
         left: 30px;
         top: 340px;
       .result {
+        font-size: 28pt;
+        margin-top: 10px;
         position: absolute;
         &.remain {
-          left: 280px;
+          left: 220px;
         }
       }
       }
