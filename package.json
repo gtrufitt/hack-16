@@ -40,10 +40,14 @@
   },
   "scripts": {
     "start": "node server/index.js",
+    "startdev": "nodemon server/index.js",
     "copyImg": "copyfiles -f client/img/* public/img",
     "build": "browserify client/main.js -o public/bundle.js && npm run copyImg",
     "preinstall": "mkdir -p public/img",
     "postinstall": "npm run build",
     "watch": "watchify client/main.js -v -o public/bundle.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }
