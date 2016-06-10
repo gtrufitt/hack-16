@@ -25,29 +25,39 @@ var CoffeePollComponent = React.createClass({
         window.onresize = () => {
             this.setState({width: domNode.offsetWidth});
         };
+        this.interval = setInterval(this.notifyResults, 5000)
+    },
+
+    componentWillUnmount: function() {
+        clearInterval(this.interval);
+        console.log("The coffee poll component unmounted!!")
     },
 
     render: function() {
         return (
-            <div className="coffeePollComponent">
+            <div className="admin coffeePollComponent">
                 <h2>Coffee Poll</h2>
                 <BarChart
-                    ylabel='Hackers'
+                    ylabel='Coffee drinkers'
                     width={this.state.width}
                     height={500}
                     margin={margin}
                     data={
-                        this.state.numbers.map(i => ({text: i || "I drink tea", value: this.state["had" + i]}))
+                        this.state.numbers.map(i => ({text: i || "none", value: this.state["had" + i]}))
                     }
                 />
             </div>
         );
     },
 
+    notifyResults: function(){
+        this.props.notifyResults(this.state)
+    },
+
     onMessage: function(event) {
         var jsonEvent = JSON.parse(event.data);
 
-        if (jsonEvent.messageType === 'coffeeVote') {
+        if (jsonEvent.messageType === 'coffeeVote' && jsonEvent.messageData && !jsonEvent.messageData.data) {
             var number = jsonEvent.messageData.numberOfCoffees;
             var newState = {};
             newState['had'+ number] = this.state['had'+ number] + 1;

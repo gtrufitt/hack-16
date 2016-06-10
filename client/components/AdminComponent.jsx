@@ -4,8 +4,7 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var SpotTheBallComponent = require("./admin/spotTheBall.jsx");
 var CoffeePollComponent = require("./admin/CoffeePollComponent.jsx");
 var InitialComponent = require("./admin/InitialComponent.jsx");
-
-var comms = require("../utils/comms-client")();
+var SeeSawComponent = require("./admin/SeeSawComponent.jsx");
 
 var AdminComponent = React.createClass({
 
@@ -22,10 +21,12 @@ var AdminComponent = React.createClass({
 
     render: function() {
         var newComponent;
+        var coffeeProps = {ws: this.props.ws, notifyResults: this.notifyResults};
         switch(this.state.currentComponent) {
             case 'InitialComponent': newComponent = <InitialComponent key="InitialComponent" {...this.props} />; break;
             case 'CoffeePollComponent': newComponent = <CoffeePollComponent key="CoffeePollComponent" {...this.props} />; break;
             case 'SpotTheBallComponent': newComponent = <SpotTheBallComponent key="SpotTheBallComponent" {...this.props} />; break;
+            case 'SeeSawComponent': newComponent = <SeeSawComponent key="SeeSawComponent" {...this.props} />; break;
         }
         return (
             <div className="reactComponentContainer admin--container">
@@ -55,6 +56,11 @@ var AdminComponent = React.createClass({
                                 SPOT THE BALL
                             </button>
                         </div>
+                        <div>
+                            <button className="admin-btn f-textSans" onClick={this.setToSeeSaw}>
+                                SEE-SAW
+                            </button>
+                        </div>
                     </div>
                     <p className="admin--connected">Connected: {this.state.usersConnected}</p>
                 </footer>
@@ -74,12 +80,17 @@ var AdminComponent = React.createClass({
         });
     },
 
+
     setToSpotTheBall: function () {
         this.setState({
             currentComponent: 'SpotTheBallComponent'
         });
     },
-
+    setToSeeSaw: function () {
+        this.setState({
+            currentComponent: 'SeeSawComponent'
+        });
+    },
     componentDidUpdate: function () {
         this.props.ws.send(JSON.stringify({
             messageType: 'setCurrentComponent',
@@ -89,10 +100,13 @@ var AdminComponent = React.createClass({
         }));
     },
 
-    onButtonClick: function () {
-        this.setState({
-            currentComponent: 'CoffeePollComponent'
-        });
+    notifyResults: function (data) {
+        this.props.ws.send(JSON.stringify({
+            messageType: 'coffeeVote',
+            messageData: {
+                data : data
+            }
+        }));
     },
 
     onMessage: function (event) {
