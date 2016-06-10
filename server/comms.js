@@ -126,6 +126,18 @@ module.exports = function (app) {
         });
     }
 
+    function keepAlivePing() {
+        sendToAll({
+            messageType: 'ping'
+        })
+        sendToAdmin({
+            messageType: 'ping'
+        })
+    }
+
+    setInterval(keepAlivePing, 2000);
+
+
     return {
         setupIndexListeners: setupIndexListeners,
         setupAdminListeners: setupAdminListeners
