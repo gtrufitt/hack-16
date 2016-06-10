@@ -37,10 +37,10 @@ var SeeSawComponent = React.createClass({
         var rotation = 0;       
 
         if (bp > rp) {
-            rotation = bp * -0.15;
+            rotation = bp * -0.25;
         }
         if (rp > bp) {
-            rotation = rp * 0.15;
+            rotation = rp * 0.25;
         }
         return (
             <div className="SeeSawComponent">
