@@ -13,7 +13,7 @@ var InitialComponent = React.createClass({
             <div className="initialComponent">
                 <h1>Welcome to the Guardian4Real(time) demo!</h1>
                 <h2 className="huge">GO HERE NOW: http://bit.ly/hack4rt</h2>
-                <h2>Phone or laptop</h2>
+                <h2>Phone or laptop (4G so we don't crush the wi-fi)</h2>
                 <h2>Real time participation!</h2>
                 <h2>Instant Feedback!</h2>
                 <h2>See other users!</h2>
