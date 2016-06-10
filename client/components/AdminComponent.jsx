@@ -27,7 +27,9 @@ var AdminComponent = React.createClass({
         }
         return (
             <div className="reactComponentContainer">
-                <h1 className="f-header">Admin</h1>
+                <header className="header">
+                    <img className="logo" src="./img/logo.jpg" alt=""/>
+                </header>
                 <div>
                     <button className="admin-btn f-textSans" onClick={this.setToInitial}>
                         Set to InitialComponent

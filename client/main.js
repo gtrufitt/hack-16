@@ -2,8 +2,8 @@ require('whatwg-fetch');
 
 // CSS
 var sassify = require('sassify');
+var globalCss = require('./global.scss');
 var adminCss = require('./admin.scss');
-var indexCss = require('./index.scss');
 var mainCss = require('./main.scss');
 
 var host = location.origin.replace(/^http/, 'ws')
@@ -12,9 +12,10 @@ var ws = new WebSocket(host);
 var isAdmin = window.location.pathname.indexOf('admin') > -1;
 
 if (isAdmin) {
+    sassify(globalCss);
     sassify(adminCss);
 } else {
-    sassify(indexCss);
+    sassify(globalCss);
     sassify(mainCss);
 }
 
