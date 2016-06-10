@@ -29,7 +29,7 @@ var CoffeePollComponent = React.createClass({
 
     render: function() {
         return (
-            <div className="coffeePollComponent">
+            <div className="admin coffeePollComponent">
                 <h2>Coffee Poll</h2>
                 <BarChart
                     ylabel='Hackers'
@@ -37,7 +37,7 @@ var CoffeePollComponent = React.createClass({
                     height={500}
                     margin={margin}
                     data={
-                        this.state.numbers.map(i => ({text: i || "I drink tea", value: this.state["had" + i]}))
+                        this.state.numbers.map(i => ({text: i || "tea", value: this.state["had" + i]}))
                     }
                 />
             </div>

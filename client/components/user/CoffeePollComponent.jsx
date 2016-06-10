@@ -19,15 +19,25 @@ var CoffeePollComponent = React.createClass({
     render: function() {
         return (
             <div className="coffeePollComponent">
-                <h2 className="f-header">User Coffee Poll</h2>
-                {this.state.buttons.map((_, i)=> (
-                    <button key={i} onClick={this.onButtonClick.bind(this, i)}>{i}</button>
+                <h2 className="f-header">Question 1</h2>
+                <h3 className="f-header">How many coffees have you had today?</h3>
+                {!this.state.numberOfCoffees && this.state.buttons.map((_, i)=> (
+                    <button
+                        key={i}
+                        className="admin-btn f-textSans"
+                        onClick={this.onButtonClick.bind(this, i)}>{
+                        i || "tea"
+                    }</button>
                 ))}
+                {!!this.state.numberOfCoffees && <p>
+                    Thanks for voting! Watch for the results on the big screen...
+                </p>}
             </div>
         );
     },
 
     onButtonClick: function (i){
+        this.setState({numberOfCoffees: i || "tea"});
         comms.sendAMessage({
             messageType: 'coffeeVote',
             messageData: {
